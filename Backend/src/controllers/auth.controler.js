@@ -12,6 +12,8 @@ const getCookieOptions = () => {
     path: "/",
   };
 };
+console.log("NODE_ENV =", process.env.NODE_ENV);
+console.log("Cookie Options =", getCookieOptions());
 
 // Register user
 async function registerController(req, res) {
