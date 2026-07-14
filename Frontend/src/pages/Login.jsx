@@ -31,7 +31,7 @@ const Login = () => {
       toast.success("Welcome back! 👋", {
         description: "You're now signed in to Nova AI.",
       });
-      console.log("Login Response", response.data);
+      console.log("Login Response", response);
     } catch (error) {
       toast.error("Oops! Something went wrong", {
         description: "Please check your details and try again.",
