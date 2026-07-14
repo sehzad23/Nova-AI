@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { connectSocket } from "../socket/socket";
 import { toast } from "sonner";
-import { loginUser } from "../api/auth.api";
+import { loginUser, getUser } from "../api/auth.api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,24 +10,22 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      // const response = await axios.post(
-      //   "http://localhost:3000/api/auth/login",
-      //   data,
-      //   {
-      //     withCredentials: true,
-      //   },
-      // );
+      const response = await loginUser(data);
 
+      // Verify token is set by fetching user data
+      await getUser();
 
-      const response = await loginUser(data)
-
+      // Connect socket after authentication is confirmed
       connectSocket();
+      
+      // Navigate after everything is ready
       navigate("/");
+      
       toast.success("Welcome back! 👋", {
         description: "You're now signed in to Nova AI.",
       });
