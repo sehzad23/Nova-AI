@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import { getUser } from "../api/auth.api";
 
 const ProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -9,9 +9,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/auth/user", {
-          withCredentials: true,
-        });
+        const response = await getUser();
         setUser(response.data.user);
       } catch (error) {
         setUser(null);

@@ -1,5 +1,5 @@
 import { Settings } from "lucide-react";
-import axios from "axios";
+import {getUser} from "../../api/auth.api"
 import UserSettingsModal from "../../Model/UserSettingsModal";
 import { useState } from "react";
 
@@ -14,12 +14,7 @@ const SidebarFooter = () => {
 
   try {
     setOpen(true);
-    const response = await axios.get(
-      "http://localhost:3000/api/auth/user",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await getUser();
 
     setUser(response.data.user);
     console.log(response.data.user);
