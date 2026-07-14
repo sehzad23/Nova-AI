@@ -10,18 +10,17 @@ const SidebarFooter = () => {
 
   // user settings
   const handleSettingsClick = async () => {
-  setOpen(true);
-
-  try {
     setOpen(true);
-    const response = await getUser();
 
-    setUser(response.data.user);
-    console.log(response.data.user);
-  } catch (err) {
-    console.log(err);
-  }
-};
+    try {
+      const response = await getUser();
+
+      setUser(response.user ?? response.data?.user ?? null);
+      console.log(response.user ?? response.data?.user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
